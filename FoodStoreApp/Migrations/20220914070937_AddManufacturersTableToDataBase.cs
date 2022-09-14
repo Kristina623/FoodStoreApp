@@ -4,7 +4,7 @@
 
 namespace FoodStoreApp.Migrations
 {
-    public partial class AddCategoryTableToDatabase : Migration
+    public partial class AddManufacturersTableToDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,12 +22,29 @@ namespace FoodStoreApp.Migrations
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Manufacturers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Manufacturers", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Manufacturers");
         }
     }
 }
